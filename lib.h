@@ -16,3 +16,13 @@
 		{ \
 			this->VAR = VAR; \
 		} 
+		
+#define GETTER_ENCAP(TYPE, VAR) \
+	private: \
+		TYPE VAR; \
+	\
+	public: \
+		inline TYPE get_##VAR () \
+		{ \
+			return this->VAR; \
+		} 
