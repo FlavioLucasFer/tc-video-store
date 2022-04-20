@@ -8,6 +8,6 @@ uint16_t generate_video_id ()
 
 std::string video_t::to_string ()
 {
-	return std::to_string(this->id) + " - " + this->name;
+	return std::to_string(this->id) + " - " + this->name + " " + (this->avaliable ? "(AVALIABLE)" : "(UNAVALIABLE)");
 }
 

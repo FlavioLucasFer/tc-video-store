@@ -10,7 +10,7 @@ class collection_t
 		std::list<video_t> videos;
 		
 	public:
-		video_t find_video_by_id (uint16_t id);
+		video_t* find_video_by_id (uint16_t id);
 		
 	public:
 		void add_video (video_t video);

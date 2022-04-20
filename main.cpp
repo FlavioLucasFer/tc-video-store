@@ -11,7 +11,19 @@ int main ()
 	collection.add_video(video);
 	collection.add_video(video2);
 	
-	video_t f = collection.find_video_by_id(1);
+	// collection.remove_video(video.get_id());
+	
+	// video_t f = collection.find_video_by_id(1);
+	
+	collection.rent_video(video2.get_id());
+	
+	collection.print();
+	
+	std::cout << std::endl;
+	
+	collection.return_video(video2.get_id());
+	
+	collection.print();
 
 	return 0;
 }
