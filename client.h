@@ -1,3 +1,6 @@
+#ifndef __tc_video_store__client__
+#define __tc_video_store__client__
+
 #include "lib.h"
 
 uint16_t generate_client_id ();
@@ -10,14 +13,24 @@ class client_t
 	GETTER_SETTER_ENCAP(std::string, phone_number);
 
 	public:
-		inline client_t (std::string name, std::string email, std::string phone_number)
+		client_t (std::string name, std::string email, std::string phone_number)
 		{
-			this->id = generate_client_id();
+			this->id = generate_client_id();	
 			this->name = name;
 			this->email = email;
 			this->phone_number = phone_number;
+			
+			std::cout << this->name << std::endl;
+			std::cout << this->email << std::endl;
 		}
 		
 		std::string to_string ();
+		
+		inline std::string& get_email_ref () 
+		{ 
+			return this->email; 
+		} 
 };
+
+#endif
 

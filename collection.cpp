@@ -1,6 +1,6 @@
 #include "collection.h"
 
-video_t* collection_t::find_video_by_id (uint16_t id)
+video_t* collection_t::get_video_by_id (uint16_t id)
 {	
 	for (auto it = this->videos.begin(); it != this->videos.end(); it++) {
 		video_t& video = *it;
@@ -24,14 +24,14 @@ void collection_t::remove_video (uint16_t id)
 	});
 }
 
-bool collection_t::rent_video (uint16_t id)
+bool collection_t::rent_video (uint16_t id, client_t& client)
 {
-	video_t *video = this->find_video_by_id(id);
+	video_t *video = this->get_video_by_id(id);
 	
-	if (video == nullptr || !video->get_avaliable())
+	if (video == nullptr || !video->is_avaliable())
 		return false;
 		
-	video->set_avaliable(false);
+	video->set_client(&client);
 	
 	return true;
 }
@@ -39,12 +39,12 @@ bool collection_t::rent_video (uint16_t id)
 
 bool collection_t::return_video (uint16_t id)
 {
-	video_t *video = this->find_video_by_id(id);
+	video_t *video = this->get_video_by_id(id);
 	
-	if (video == nullptr || video->get_avaliable())
+	if (video == nullptr || video->is_avaliable())
 		return false;
 		
-	video->set_avaliable(true);
+	video->set_client(nullptr);
 	
 	return true;	
 }

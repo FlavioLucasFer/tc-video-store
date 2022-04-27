@@ -1,4 +1,5 @@
 #include "lib.h"
+#include "client.h"
 
 uint16_t generate_video_id ();
 
@@ -11,7 +12,10 @@ class video_t
 	GETTER_SETTER_ENCAP(std::string, duration);
 	GETTER_SETTER_ENCAP(std::string, category);
 	GETTER_SETTER_ENCAP(double, price);
-	GETTER_SETTER_ENCAP(bool, avaliable);
+	//GETTER_SETTER_ENCAP_REF(client_t, *client);
+	
+	private:
+		client_t* client;
 
 	public:
 		inline video_t (
@@ -30,9 +34,25 @@ class video_t
 			this->duration = duration;
 			this->category = category;
 			this->price = price;
-			this->avaliable = true;
+			this->client = nullptr;
 		}
 		
+		inline client_t* get_client()
+		{
+			return this->client;
+		}
+		
+		inline void set_client(client_t* client)
+		{
+			this->client = client;
+		}
+		
+	public:
 		std::string to_string ();
+		
+		inline bool is_avaliable()
+		{
+			return this->client == nullptr;
+		}
 };
 
