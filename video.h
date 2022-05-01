@@ -1,3 +1,6 @@
+#ifndef __TC_VIDEO_STORE_VIDEO__
+#define __TC_VIDEO_STORE_VIDEO__
+
 #include "lib.h"
 #include "client.h"
 
@@ -7,15 +10,12 @@ class video_t
 {
 	GETTER_ENCAP(uint16_t, id);
 	GETTER_SETTER_ENCAP(std::string, name);
+	GETTER_SETTER_ENCAP(double, price);
 	GETTER_SETTER_ENCAP(std::string, director);
 	GETTER_SETTER_ENCAP(std::string, cast);
 	GETTER_SETTER_ENCAP(std::string, duration);
 	GETTER_SETTER_ENCAP(std::string, category);
-	GETTER_SETTER_ENCAP(double, price);
-	//GETTER_SETTER_ENCAP_REF(client_t, *client);
-	
-	private:
-		client_t* client;
+	GETTER_SETTER_ENCAP(client_t*, client);
 
 	public:
 		inline video_t (
@@ -37,16 +37,6 @@ class video_t
 			this->client = nullptr;
 		}
 		
-		inline client_t* get_client()
-		{
-			return this->client;
-		}
-		
-		inline void set_client(client_t* client)
-		{
-			this->client = client;
-		}
-		
 	public:
 		std::string to_string ();
 		
@@ -56,3 +46,4 @@ class video_t
 		}
 };
 
+#endif

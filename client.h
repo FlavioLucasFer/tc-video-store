@@ -1,5 +1,5 @@
-#ifndef __tc_video_store__client__
-#define __tc_video_store__client__
+#ifndef __TC_VIDEO_STORE_CLIENT__
+#define __TC_VIDEO_STORE_CLIENT__
 
 #include "lib.h"
 
@@ -19,9 +19,6 @@ class client_t
 			this->name = name;
 			this->email = email;
 			this->phone_number = phone_number;
-			
-			std::cout << this->name << std::endl;
-			std::cout << this->email << std::endl;
 		}
 		
 		std::string to_string ();
