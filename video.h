@@ -8,14 +8,14 @@ uint16_t generate_video_id ();
 
 class video_t
 {
-	GETTER_ENCAP(uint16_t, id);
-	GETTER_SETTER_ENCAP(std::string, name);
-	GETTER_SETTER_ENCAP(double, price);
-	GETTER_SETTER_ENCAP(std::string, director);
-	GETTER_SETTER_ENCAP(std::string, cast);
-	GETTER_SETTER_ENCAP(std::string, duration);
-	GETTER_SETTER_ENCAP(std::string, category);
-	GETTER_SETTER_ENCAP(client_t*, client);
+	OO_ENCAPSULATE_RO(uint16_t, id);
+	OO_ENCAPSULATE(std::string, name);
+	OO_ENCAPSULATE(double, price);
+	OO_ENCAPSULATE(std::string, director);
+	OO_ENCAPSULATE(std::string, cast);
+	OO_ENCAPSULATE(std::string, duration);
+	OO_ENCAPSULATE(std::string, category);
+	OO_ENCAPSULATE(client_t*, client);
 
 	public:
 		inline video_t (

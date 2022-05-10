@@ -1,15 +1,15 @@
 #include "video_collection.h"
 
-video_t* video_collection_t::get_video_by_id (uint16_t id)
+video_t* video_collection_t::get_video_by_id (uint_t id)
 {	
-	for (auto it = this->videos.begin(); it != this->videos.end(); it++) {
-		video_t& video = *it;
-		
-		if (video.get_id() == id)
-			return &video;
-	}
+	video_t *video = nullptr;
+
+	lib::for_each<video_t>(this->videos, [&](video_t& v) {
+		if (v.get_id() == id)
+			video = &v;
+	}, video != nullptr);
 	
-	return nullptr;
+	return video;
 }
 
 void video_collection_t::add (video_t video)
@@ -67,29 +67,24 @@ bool video_collection_t::return_video (uint16_t id)
 
 void video_collection_t::list ()
 {
-	for (auto it = this->videos.begin(); it != this->videos.end(); it++) {
-		video_t& video = *it;
-		
-		PRINTLN(" " + video.to_string() + (video.is_avaliable() ? "(AVALIABLE)" : "(RENTED)"));
-	}
+	lib::for_each<video_t>(this->videos, [](video_t& video) {
+		if (&video != nullptr)
+			std::cout << " " << video.to_string() << (video.is_avaliable() ? "(AVALIABLE)" : "(RENTED)") << std::endl;
+	});
 }
 
 void video_collection_t::list_rented ()
 {
-	for (auto it = this->videos.begin(); it != this->videos.end(); it++) {
-		video_t& video = *it;
-		
-		if (!video.is_avaliable())
-			PRINTLN(" " + video.to_string() + " [" + video.get_client()->to_string() + "]");
-	}
+	lib::for_each<video_t>(this->videos, [](video_t& video) {
+		if (&video != nullptr && !video.is_avaliable())
+			std::cout << " " << video.to_string() << " [" << video.get_client()->to_string() << "]" << std::endl;
+	});
 }
 
 void video_collection_t::list_avaliable ()
 {
-	for (auto it = this->videos.begin(); it != this->videos.end(); it++) {
-		video_t& video = *it;
-		
-		if (video.is_avaliable())
+	lib::for_each<video_t>(this->videos, [](video_t& video) {
+		if (&video != nullptr && video.is_avaliable())
 			PRINTLN(" " + video.to_string());
-	}
+	});
 }

@@ -7,10 +7,10 @@ uint16_t generate_client_id ();
 
 class client_t
 {
-	GETTER_ENCAP(uint16_t, id);
-	GETTER_SETTER_ENCAP(std::string, name);
-	GETTER_SETTER_ENCAP(std::string, email);
-	GETTER_SETTER_ENCAP(std::string, phone_number);
+	OO_ENCAPSULATE_RO(uint16_t, id);
+	OO_ENCAPSULATE(std::string, name);
+	OO_ENCAPSULATE(std::string, email);
+	OO_ENCAPSULATE(std::string, phone_number);
 
 	public:
 		client_t (std::string name, std::string email, std::string phone_number)
@@ -22,11 +22,6 @@ class client_t
 		}
 		
 		std::string to_string ();
-		
-		inline std::string& get_email_ref () 
-		{ 
-			return this->email; 
-		} 
 };
 
 #endif
