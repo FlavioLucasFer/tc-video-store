@@ -12,7 +12,7 @@ class client_collection_t
 		std::list<client_t> clients;
 
 	public:
-		client_t* get_client_by_id (uint16_t id);
+		client_t* get_client_by_id (uint_t id);
 		void add (client_t client);
 		void update (uint16_t id, std::string name, std::string email, std::string phone_number);
 		void remove (uint16_t id);

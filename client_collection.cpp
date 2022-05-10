@@ -1,15 +1,15 @@
 #include "client_collection.h"
 
-client_t* client_collection_t::get_client_by_id (uint16_t id)
+client_t* client_collection_t::get_client_by_id (uint_t id)
 {
-	for (auto it = this->clients.begin(); it != this->clients.end(); it++) {
-		client_t& client = *it;
+	client_t *client = nullptr;
 
-		if (client.get_id() == id)
-			return &client;
-	}
+	lib::for_each<client_t>(this->clients, [&](client_t& c) {
+		if (c.get_id() == id) 
+			client = &c;
+	}, client != nullptr);
 
-	return nullptr;
+	return client;
 }
 
 void client_collection_t::add (client_t client)
@@ -21,7 +21,7 @@ void client_collection_t::update (uint16_t id, std::string name, std::string ema
 {
 	client_t *client = this->get_client_by_id(id);
 
-	if (!client)
+	if (client == nullptr)
 		return;
 
 	client->set_name(name);
@@ -38,9 +38,7 @@ void client_collection_t::remove (uint16_t id)
 
 void client_collection_t::list ()
 {
-	for (auto it = this->clients.begin(); it != this->clients.end(); it++) {
-		client_t& client = *it;
-
-		PRINTLN(" " + client.to_string());
-	}
+	lib::for_each<client_t>(this->clients, [](client_t& client) {
+		std::cout << " " << client.to_string() << std::endl;
+	});
 }

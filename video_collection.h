@@ -8,13 +8,13 @@
 
 class video_collection_t
 {
-	GETTER_ENCAP(double, billing);
+	OO_ENCAPSULATE_RO(double, billing);
 
 	private:
 		std::list<video_t> videos;
 		
 	public:
-		video_t* get_video_by_id (uint16_t id);
+		video_t* get_video_by_id (uint_t id);
 		void add (video_t video);
 		void remove (uint16_t id);
 		void update (uint16_t id, std::string name, double price, std::string director, std::string cast, std::string duration, std::string category);
@@ -25,7 +25,7 @@ class video_collection_t
 		void list_avaliable ();
 
 	
-	void operator<< (const video_t video)
+	void operator << (const video_t video)
 	{
 		this->add(video);
 	}
